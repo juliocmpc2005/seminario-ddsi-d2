@@ -1,0 +1,13 @@
+.venv/
+.cache/
+.local/
+__pycache__/
+*.pyc
+config.ini
+entrega/
+*.zip
+docs/pruebas-oracle.txt
+.DS_Store
+.env
+.env.*
+!.env.example

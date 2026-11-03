@@ -1,0 +1,19 @@
+Pruebas locales de lógica con SQLite (no acreditan Oracle/ODBC).
+
+test_cancel_restores_header_details_and_stock (test_orders.TransactionsTest.test_cancel_restores_header_details_and_stock) ... ok
+test_clear_preserves_header_and_restores_all_stock (test_orders.TransactionsTest.test_clear_preserves_header_and_restores_all_stock) ... ok
+test_commit_and_independent_observer (test_orders.TransactionsTest.test_commit_and_independent_observer) ... ok
+test_duplicate_order_does_not_modify_committed_data (test_orders.TransactionsTest.test_duplicate_order_does_not_modify_committed_data) ... ok
+test_eof_leaves_work_uncommitted_for_outer_cleanup (test_orders.TransactionsTest.test_eof_leaves_work_uncommitted_for_outer_cleanup) ... ok
+test_input_validation_and_invalid_service_state (test_orders.TransactionsTest.test_input_validation_and_invalid_service_state) ... ok
+test_insert_error_rolls_back_just_current_line_and_stock (test_orders.TransactionsTest.test_insert_error_rolls_back_just_current_line_and_stock) ... ok
+test_menu_add_clear_cancel_always_displays_tables (test_orders.TransactionsTest.test_menu_add_clear_cancel_always_displays_tables) ... ok
+test_missing_product_and_insufficient_stock_keep_previous_lines (test_orders.TransactionsTest.test_missing_product_and_insufficient_stock_keep_previous_lines) ... ok
+test_oracle_connection_format (test_orders.TransactionsTest.test_oracle_connection_format) ... ok
+test_same_product_accumulates_and_stock_can_reach_zero (test_orders.TransactionsTest.test_same_product_accumulates_and_stock_can_reach_zero) ... ok
+test_show_tables (test_orders.TransactionsTest.test_show_tables) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.033s
+
+OK
