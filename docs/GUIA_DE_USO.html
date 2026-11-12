@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Guía de uso · Seminario 1 DDSI · D2</title><style>
+:root{--ink:#1c2430;--muted:#5b6676;--line:#d9dfe7;--bg:#fff;--soft:#f4f6f9;--accent:#17395c;--app:#2f5d9b;--obs:#2e7d5b;--shell:#4a5261;
+--tbg:#1b212c;--ttx:#d7dde8;--tin:#ffd166;--thl:rgba(255,209,102,.14)}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px 20px 64px}
+h1{font-size:34px;line-height:1.15;margin:.2em 0 .3em;color:var(--accent);letter-spacing:-.01em}
+h2{font-size:23px;line-height:1.25;margin:0 0 .6em;color:var(--accent);display:flex;gap:12px;align-items:baseline;border-bottom:2px solid var(--line);padding-bottom:8px}
+h2 span{flex:none;font-size:14px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:2px 9px;position:relative;top:-3px}
+h3{font-size:17px;margin:1.7em 0 .5em;color:var(--ink)}
+h4{font-size:15.5px;margin:0 0 .3em}
+p{margin:.6em 0}
+section{margin-top:48px}
+a{color:#1d5fa8}
+code,kbd{font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:1px 5px;overflow-wrap:anywhere}
+kbd{background:#fff;box-shadow:0 1px 0 var(--line)}
+.small{font-size:13.5px;color:var(--muted)}
+em{font-style:normal;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#8a5a00;background:#fff3d6;border-radius:4px;padding:1px 6px}
+.cover{border-bottom:3px solid var(--accent);padding-bottom:20px}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.03em;color:var(--muted);margin:0}
+.lead{font-size:17.5px;color:#34404f;max-width:700px}
+.meta{font-size:13px;color:var(--muted)}
+.toc{background:var(--soft);border-radius:10px;padding:16px 22px;margin-top:24px}
+.toc h2{font-size:15px;border:0;margin:0 0 6px;padding:0;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.toc ol{margin:0;padding-left:22px;columns:2;column-gap:36px}
+.toc li{break-inside:avoid;padding:2px 0}
+.toc a{text-decoration:none}
+.legend{margin-top:24px;border:1px solid var(--line);border-radius:10px;padding:14px 20px}
+.legend h3{margin:0 0 6px;font-size:15px}
+.legend ul{margin:0;padding-left:20px;font-size:14px}
+.demo{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;padding:1px 6px;border-radius:3px;background:var(--tbg)}
+.dim.demo{color:#8a94a6}.hl.demo{color:var(--ttx);background:#3a3a33}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+thead th{background:var(--soft);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+td code{white-space:nowrap}table.narrow{width:auto}table.narrow td,table.narrow th{text-align:center;padding:6px 12px}
+table.narrow thead td{background:var(--soft);font-weight:700}
+.chain{display:flex;align-items:stretch;gap:6px;margin:16px 0 6px}
+.chain div{flex:1 1 0;min-width:0;border:1.5px solid var(--line);border-radius:8px;padding:9px 8px;text-align:center;background:#fff}
+.chain div.db{border-color:var(--accent);background:#eef3f9}
+.chain b{display:block;font-size:14px}.chain small{color:var(--muted);font-size:11.5px}
+.chain span{align-self:center;color:var(--muted);font-size:18px}
+pre{margin:0;font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;overflow-x:auto}
+pre.tree{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:14px 0;line-height:1.55}
+pre.tree i{font-style:normal;color:var(--muted)}pre.tree b{color:var(--accent)}pre.tree u{text-decoration:none;color:#8a5a00}
+pre.cmd{background:var(--tbg);color:var(--ttx);border-radius:8px;padding:10px 14px;margin:8px 0}
+.step{display:table;width:100%;margin:22px 0 10px;break-inside:avoid}.pair{break-inside:avoid}.step.keepnext{break-after:avoid}.step>div{display:table-cell;vertical-align:top}
+.step>.num{width:44px}.step .num span{display:block;width:30px;height:30px;line-height:30px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:14px}
+.step>div:last-child{min-width:0}
+.step ul,.step ol{margin:.4em 0;padding-left:20px}
+.note{border-left:4px solid;border-radius:0 8px 8px 0;padding:10px 14px;margin:14px 0;font-size:14px;break-inside:avoid}
+.note.info{border-color:#3b78c2;background:#eef4fb}.note.warn{border-color:#d49a1c;background:#fff8e6}.note.danger{border-color:#c4483c;background:#fdf0ee}
+figure.term{margin:12px 0 20px;border-radius:9px;overflow:hidden;background:var(--tbg);border:1px solid #10141b}
+.term .bar{display:flex;align-items:center;gap:6px;padding:7px 12px;background:var(--shell);color:#fff;font-size:12px;font-weight:600}
+.term.app .bar{background:var(--app)}.term.obs .bar{background:var(--obs)}
+.term .bar i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.45)}
+.term .bar span{margin-left:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.term pre{color:var(--ttx);padding:12px 14px}
+.term .in,b.in{color:var(--tin);font-weight:700}
+.term .hl{display:inline-block;min-width:100%;background:var(--thl);box-shadow:-14px 0 0 var(--thl),14px 0 0 var(--thl)}
+.term .dim{color:#8a94a6}
+.term figcaption{background:#fff;color:#3c4654;font-size:13.5px;padding:8px 12px;border-top:1px solid var(--line)}
+.map{display:flex;gap:10px;align-items:center;margin:16px 0 4px;flex-wrap:wrap}
+.map .box{flex:1 1 260px;border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;background:#fff}
+.map .box.main{border-color:var(--app)}.map .box.sub{border-color:var(--obs)}
+.map ol{margin:4px 0 0;padding-left:20px;font-size:14px}.map small{color:var(--muted)}
+.map .arrow{flex:none;text-align:center;font-size:12px;color:var(--muted);line-height:1.2}
+.timeline{display:flex;gap:6px;margin:12px 0}
+.timeline div{flex:1 1 0;min-width:0;border:1.5px solid var(--line);border-radius:8px;padding:8px;text-align:center;background:#fff}
+.timeline b{display:block;font-size:13px}.timeline small{font-size:11.5px;color:var(--muted)}
+.timeline .sp{border-style:dashed;border-color:#d49a1c;background:#fff8e6}.timeline .back{border-color:#d49a1c}
+.timeline .ok{border-color:var(--obs);background:#edf7f2}.timeline .ko{border-color:#c4483c;background:#fdf0ee}
+@media (max-width:600px){.timeline{flex-wrap:wrap}.timeline div{flex:1 1 120px}.chain{flex-wrap:wrap}.chain div{flex:1 1 120px}table{display:block;overflow-x:auto}.toc ol{columns:1}h1{font-size:27px}.map .arrow{width:100%}}
+@page{size:A4;margin:14mm 13mm 15mm}
+@media print{
+ body{font-size:11.5pt}main{max-width:none;padding:0}section{margin-top:26px}
+ h2,h3,h4{break-after:avoid}
+ pre{white-space:pre-wrap;font-size:8.6pt}pre.tree{font-size:8.2pt;break-inside:avoid}
+ figure.term{break-inside:avoid}figure.term.tall{break-inside:auto}.term figcaption{break-before:avoid}table{break-inside:auto}tr{break-inside:avoid}
+ .toc,.legend,.chain,.map,.timeline{break-inside:avoid}
+ a{color:inherit;text-decoration:none}
+}
+</style></head><body><main>
+<header class="cover">
+<p class="kicker">Diseño y Desarrollo de Sistemas de Información · Curso 2026/2027 · Subgrupo D2</p>
+<h1>Guía de uso del programa</h1>
+<p class="lead">Seminario 1 · Acceso a bases de datos. Cómo está organizado el proyecto, cómo se instala
+y cómo se usa cada opción, paso a paso y con capturas de sesiones reales contra Oracle.</p>
+<p class="meta">Python + ODBC + Oracle (ETSIIT) · Capturas tomadas el 12/11/2026</p>
+</header>
+
+<nav class="toc"><h2>Contenido</h2><ol>
+<li><a href="#que">Qué hace el programa</a></li>
+<li><a href="#estructura">Estructura del proyecto</a></li>
+<li><a href="#preparar">Preparación: instalar y configurar la cuenta</a></li>
+<li><a href="#arrancar">Formas de arrancar</a></li>
+<li><a href="#menu">El menú principal</a></li>
+<li><a href="#op1">Opción 1 · Borrar y crear tablas</a></li>
+<li><a href="#op3">Opción 3 · Mostrar las tablas</a></li>
+<li><a href="#op2">Opción 2 · Dar de alta un pedido</a></li>
+<li><a href="#errores">Errores y casos especiales</a></li>
+<li><a href="#op4">Opción 4 · Salir</a></li>
+<li><a href="#consulta">El cliente de consulta</a></li>
+<li><a href="#validar">Validación, pruebas y entrega</a></li>
+<li><a href="#resumen">Resumen: qué SQL hay detrás de cada opción</a></li>
+<li><a href="#problemas">Problemas frecuentes</a></li>
+</ol></nav>
+
+<section class="legend"><h3>Cómo leer las capturas</h3>
+<ul>
+<li>Son texto real copiado de la terminal al ejecutar el programa contra el servidor Oracle de la ETSIIT.</li>
+<li>Lo que <b class="in demo">está resaltado así</b> es lo que se teclea; <b class="in demo">[Intro]</b> significa pulsar Intro sin escribir nada.</li>
+<li>Las líneas <span class="hl demo">con este fondo</span> son las que hay que mirar en cada paso.</li>
+<li><span class="dim demo">···</span> indica filas de STOCK omitidas porque no cambian. El programa siempre muestra las 10.</li>
+<li>La barra azul es la <b>ventana 1</b> (la aplicación) y la barra verde es la <b>ventana 2</b> (el cliente de consulta, otra sesión).</li>
+<li>El usuario de Oracle se ha sustituido por el ficticio <code>x1234567</code>. La contraseña nunca se ve: se teclea con la entrada oculta.</li>
+</ul></section>
+
+<section id="que"><h2><span>1</span>Qué hace el programa</h2>
+<p>Es una aplicación de consola que gestiona pedidos sobre tres tablas de Oracle y sirve para demostrar
+el <b>control de transacciones</b>: los cambios de un pedido no son definitivos hasta que se confirma
+(<code>COMMIT</code>), y se pueden deshacer del todo (<code>ROLLBACK</code>) o solo en parte
+(<code>ROLLBACK TO SAVEPOINT</code>).</p>
+<table><thead><tr><th>Tabla</th><th>Columnas</th><th>Qué guarda</th></tr></thead><tbody>
+<tr><td><code>STOCK</code></td><td><u>CPRODUCTO</u>, CANTIDAD</td><td>Unidades disponibles de cada producto. Empieza con 10 productos.</td></tr>
+<tr><td><code>PEDIDO</code></td><td><u>CPEDIDO</u>, CCLIENTE, FECHA_PEDIDO</td><td>La cabecera de cada pedido.</td></tr>
+<tr><td><code>DETALLE_PEDIDO</code></td><td><u>CPEDIDO, CPRODUCTO</u>, CANTIDAD</td><td>Las líneas del pedido: qué producto y cuántas unidades.</td></tr>
+</tbody></table>
+<p>El programa habla con Oracle a través de ODBC. Esta es la cadena de componentes, la misma del diagrama del enunciado:</p>
+<div class="chain">
+<div><b>Aplicación</b><small>seminario/ (Python)</small></div><span>→</span>
+<div><b>pyodbc</b><small>biblioteca de Python</small></div><span>→</span>
+<div><b>unixODBC</b><small>Driver Manager</small></div><span>→</span>
+<div><b>Driver de Oracle</b><small>Instant Client</small></div><span>→</span>
+<div class="db"><b>Oracle</b><small>oracle0.ugr.es · practbd</small></div>
+</div>
+<p class="small">Todo lo que está a la izquierda de Oracle vive en tu ordenador, dentro de la carpeta del proyecto.</p>
+</section>
+
+<section id="estructura"><h2><span>2</span>Estructura del proyecto</h2>
+<p>Todo está dentro de una única carpeta, <code>seminario/</code>. Lo que se programa y se entrega está en
+gris oscuro; lo marcado como <em>local</em> se genera en cada ordenador y no se sube a GitHub ni va en el ZIP.</p>
+<pre class="tree">seminario/                        <i>carpeta del proyecto</i>
+├── <b>seminario/</b>                    <i>EL PROGRAMA (paquete de Python)</i>
+│   ├── __init__.py               <i>marca la carpeta como paquete</i>
+│   ├── __main__.py               <i>menús y arranque</i>
+│   ├── db.py                     <i>conexión ODBC y mostrar tablas</i>
+│   └── orders.py                 <i>tablas y transacciones del pedido</i>
+├── <b>sql/</b>
+│   ├── schema.sql                <i>los tres CREATE TABLE</i>
+│   └── consultas.sql             <i>SELECT para SQL Developer / SQL*Plus</i>
+├── <b>tests/</b>
+│   ├── test_orders.py            <i>pruebas automáticas (sin red)</i>
+│   └── oracle_integration.py     <i>validación real en Oracle</i>
+├── <b>scripts/</b>
+│   ├── install_oracle_macos.py   <i>descarga el driver de Oracle</i>
+│   ├── configure_account.py      <i>guarda tu usuario de Oracle</i>
+│   └── preparar_entrega.py       <i>genera la memoria PDF y el ZIP</i>
+├── <b>docs/</b>
+│   ├── GUIA_DE_USO.html / .pdf   <i>esta guía</i>
+│   ├── DEFENSA.md                <i>guion de la demostración</i>
+│   ├── equipo.json               <i>integrantes y reparto de trabajo</i>
+│   └── Memoria_D2.pdf            <i>memoria (se genera)</i>
+├── configurar.sh                 <i>instalación, una vez por ordenador</i>
+├── ejecutar.sh                   <i>arranca el programa</i>
+├── Iniciar.command               <i>doble clic: la aplicación</i>
+├── Consultar.command             <i>doble clic: cliente de consulta</i>
+├── Configurar_cuenta.command     <i>doble clic: guardar usuario</i>
+├── Validar_Oracle.command        <i>doble clic: validación en Oracle</i>
+├── config.example.ini            <i>plantilla de configuración</i>
+├── requirements.txt              <i>dependencia: pyodbc</i>
+├── requirements-docs.txt         <i>dependencia extra: reportlab (memoria)</i>
+├── README.md                     <i>resumen del proyecto</i>
+│
+├── <u>config.ini</u>                    <i>local · tu usuario (sin contraseña)</i>
+├── <u>.venv/</u>                        <i>local · Python del proyecto con pyodbc</i>
+├── <u>.local/</u>                       <i>local · driver de Oracle y su registro ODBC</i>
+├── <u>.cache/</u>                       <i>local · instaladores descargados</i>
+└── <u>entrega/</u>                      <i>local · el ZIP para Prado</i></pre>
+
+<h3>La carpeta <code>seminario/</code>: el programa</h3>
+<p>Son tres ficheros, cada uno con una responsabilidad. Si solo vas a leer uno, que sea <code>orders.py</code>.</p>
+<table><thead><tr><th>Fichero</th><th>Qué contiene</th><th>Funciones principales</th></tr></thead><tbody>
+<tr><td><code>db.py</code></td><td>La conexión con Oracle por ODBC, con el <b>autocommit desactivado</b>, y la forma de consultar y pintar las tablas.</td>
+<td><code>connect</code>, <code>query</code>, <code>print_table</code>, <code>show_tables</code></td></tr>
+<tr><td><code>orders.py</code></td><td><b>Todas las transacciones.</b> La clase <code>Orders</code> crea las tablas y lleva el ciclo de vida de un pedido.</td>
+<td><code>reset</code>, <code>begin</code>, <code>add</code>, <code>clear</code>, <code>cancel</code>, <code>finish</code></td></tr>
+<tr><td><code>__main__.py</code></td><td>Lo que se ve: el menú principal, el submenú del pedido, la validación de lo que se teclea y el cierre de la conexión.</td>
+<td><code>main_menu</code>, <code>new_order</code>, <code>observer</code>, <code>main</code></td></tr>
+</tbody></table>
+
+<h3>El resto de carpetas</h3>
+<table><thead><tr><th>Carpeta</th><th>Para qué sirve</th></tr></thead><tbody>
+<tr><td><code>sql/</code></td><td><code>schema.sql</code> define las tres tablas; el programa lo lee en la opción 1. <code>consultas.sql</code> son los tres <code>SELECT</code> para mirar las tablas desde otro cliente, más los comandos para cerrar sesiones colgadas.</td></tr>
+<tr><td><code>tests/</code></td><td><code>test_orders.py</code>: 13 pruebas rápidas de la lógica, que usan SQLite y no necesitan red. <code>oracle_integration.py</code>: la validación real contra Oracle con dos sesiones.</td></tr>
+<tr><td><code>scripts/</code></td><td>Herramientas que no forman parte del programa: instalar el driver, guardar el usuario y preparar la entrega.</td></tr>
+<tr><td><code>docs/</code></td><td>Documentación: esta guía, el guion de la defensa, el reparto del equipo y la memoria.</td></tr>
+<tr><td><code>.venv/</code> <em>local</em></td><td>Entorno virtual: una copia de Python solo para este proyecto, con <code>pyodbc</code> instalado. Así no se toca el Python del sistema.</td></tr>
+<tr><td><code>.local/</code> <em>local</em></td><td><code>instantclient/</code> contiene las bibliotecas de Oracle (incluido el driver ODBC y SQL*Plus). <code>odbcinst.ini</code> es el registro del driver en unixODBC; lo escribe <code>ejecutar.sh</code> en cada arranque.</td></tr>
+<tr><td><code>.cache/</code> <em>local</em></td><td>Los instaladores de Oracle descargados, para no bajarlos otra vez.</td></tr>
+<tr><td><code>entrega/</code> <em>local</em></td><td>El ZIP que se sube a Prado. Lo crea <code>scripts/preparar_entrega.py</code>.</td></tr>
+</tbody></table>
+</section>
+
+<section id="preparar"><h2><span>3</span>Preparación: instalar y configurar la cuenta</h2>
+<p>Esto se hace una sola vez en cada ordenador. Si el proyecto ya está instalado en el tuyo, salta al paso 3.</p>
+<div class="step"><div class="num"><span>1</span></div><div><h4>Comprueba los requisitos</h4><ul><li>Mac con Apple Silicon, Python 3.11 o posterior y <a href="https://brew.sh">Homebrew</a>.
+     Para otros sistemas, mira el apartado «Instalación» del <code>README.md</code>.</li>
+     <li>Estar conectado a <b>Eduroam</b> o a la <b>VPN de la UGR</b>: el servidor Oracle no es accesible desde fuera.</li>
+     <li>Tu cuenta de Oracle de la ETSIIT. Según el anexo I del enunciado, el usuario es tu DNI sin la letra y con el
+     primer dígito cambiado por una <code>x</code> minúscula (por ejemplo, <code>12345678Z</code> → <code>x2345678</code>),
+     y la contraseña inicial es ese mismo usuario.</li></ul></div></div>
+<div class="step"><div class="num"><span>2</span></div><div><h4>Instala el proyecto</h4><p>Abre la aplicación Terminal, entra en la carpeta del proyecto y ejecuta el instalador:</p>
+     <pre class="cmd">cd ruta/a/seminario
+./configurar.sh</pre>
+     <p>El instalador hace cuatro cosas, en este orden:</p>
+     <ol><li>Instala <b>unixODBC</b> (el Driver Manager) con Homebrew, si no lo tenías.</li>
+     <li>Crea el entorno <code>.venv</code> e instala en él <b>pyodbc</b>.</li>
+     <li>Copia <code>config.example.ini</code> a <code>config.ini</code>.</li>
+     <li>Descarga <b>Oracle Instant Client</b> (unos 145 MB), comprueba que la descarga es íntegra y lo deja en <code>.local/instantclient</code>.</li></ol>
+     <p>No modifica nada fuera de la carpeta del proyecto, salvo la instalación de unixODBC.</p></div></div>
+<div class="pair"><div class="step"><div class="num"><span>3</span></div><div><h4>Guarda tu usuario de Oracle</h4><p>Haz doble clic en <code>Configurar_cuenta.command</code> desde Finder. Se abre una Terminal que te pide el
+     usuario, lo guarda en <code>config.ini</code> y a continuación prueba la conexión pidiéndote la contraseña.</p></div></div><figure class="term shell"><div class="bar"><i></i><i></i><i></i><span>Configurar_cuenta.command</span></div><pre>Según el anexo I: DNI sin letra final, cambiando el primer dígito por x minúscula.
+Ejemplo ficticio: 12345678Z -&gt; x2345678. La contraseña inicial es el mismo usuario.
+Usuario ORACLE (no el usuario de correo UGR): <b class="in">x1234567</b>
+Usuario guardado. Ahora se comprobará la conexión con contraseña oculta.
+Contraseña Oracle (oculta):
+<span class="hl">Conexión Oracle mediante ODBC establecida. Autocommit desactivado.</span>
+USUARIO
+--------
+X1234567
+(1 filas)
+
+Pulsa Intro para cerrar.</pre><figcaption><b>Captura 1.</b> Guardar el usuario y comprobar la conexión. Al teclear la contraseña no aparece nada en pantalla: es normal. Si ves «Conexión Oracle mediante ODBC establecida», todo está listo.</figcaption></figure></div>
+<div class="note warn"><b>La contraseña no se guarda en ningún sitio.</b> Se pide cada vez que arrancas el programa. Si sigues con la contraseña inicial, cámbiala (el anexo I lo pide): en SQL*Plus con el comando <code>PASSWORD</code>, o con <code>ALTER USER tu_usuario IDENTIFIED BY nueva;</code>.</div>
+<p>Para repetir la comprobación más adelante, sin cambiar el usuario:</p>
+<figure class="term shell"><div class="bar"><i></i><i></i><i></i><span>Terminal</span></div><pre>$ <b class="in">./ejecutar.sh --comprobar</b>
+Contraseña Oracle (oculta):
+<span class="hl">Conexión Oracle mediante ODBC establecida. Autocommit desactivado.</span>
+USUARIO
+--------
+X1234567
+(1 filas)</pre><figcaption><b>Captura 2.</b> <code>--comprobar</code> abre la conexión, muestra con qué usuario has entrado y termina sin tocar ninguna tabla.</figcaption></figure>
+</section>
+<section id="arrancar"><h2><span>4</span>Formas de arrancar</h2>
+<p>Hay dos maneras equivalentes: doble clic en un fichero <code>.command</code> desde Finder, o escribir el comando en
+una Terminal abierta en la carpeta del proyecto.</p>
+<table><thead><tr><th>Qué quieres hacer</th><th>Doble clic</th><th>En la Terminal</th></tr></thead><tbody>
+<tr><td>Usar la aplicación (el menú del enunciado)</td><td><code>Iniciar.command</code></td><td><code>./ejecutar.sh</code></td></tr>
+<tr><td>Abrir el cliente de consulta en otra sesión</td><td><code>Consultar.command</code></td><td><code>./ejecutar.sh --consulta</code></td></tr>
+<tr><td>Probar que la conexión funciona</td><td>—</td><td><code>./ejecutar.sh --comprobar</code></td></tr>
+<tr><td>Validar las transacciones automáticamente</td><td><code>Validar_Oracle.command</code></td><td><code>./ejecutar.sh --probar-oracle</code></td></tr>
+<tr><td>Ver la lista de opciones</td><td>—</td><td><code>./ejecutar.sh --help</code></td></tr>
+</tbody></table>
+<figure class="term shell"><div class="bar"><i></i><i></i><i></i><span>Terminal</span></div><pre>$ <b class="in">./ejecutar.sh --help</b>
+usage: python -m seminario [-h] [--consulta] [--comprobar] [--probar-oracle]
+
+Seminario 1 DDSI — Python + ODBC + Oracle
+
+options:
+  -h, --help       show this help message and exit
+  --consulta       Cliente de consulta en otra sesión
+  --comprobar      Comprobar la conexión sin modificar nada
+  --probar-oracle  Validar las transacciones en Oracle</pre><figcaption><b>Captura 3.</b> La ayuda integrada del programa.</figcaption></figure>
+<p><code>ejecutar.sh</code> hace tres cosas antes de lanzar el programa: comprueba que existe <code>.venv</code>,
+registra el driver de Oracle en unixODBC y arranca <code>python -m seminario</code> con las opciones que le hayas pasado.</p>
+</section>
+<section id="menu"><h2><span>5</span>El menú principal</h2>
+<p>Al arrancar la aplicación se pide la contraseña, se abre la conexión y aparece el menú principal. Se elige una
+opción escribiendo su número y pulsando Intro.</p>
+<figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>$ <b class="in">./ejecutar.sh</b>
+Contraseña Oracle (oculta):
+<span class="hl">Conexión Oracle mediante ODBC establecida. Autocommit desactivado.</span>
+
+1. Borrar y crear tablas e insertar stock inicial
+2. Dar de alta nuevo pedido
+3. Mostrar contenido de las tablas
+4. Salir
+Opción:</pre><figcaption><b>Captura 4.</b> Arranque. «Autocommit desactivado» significa que nada se confirma solo: lo decide el programa con COMMIT o ROLLBACK.</figcaption></figure>
+<div class="map">
+<div class="box main"><b>Menú principal</b>
+<ol><li>Borrar y crear tablas e insertar stock inicial</li><li>Dar de alta nuevo pedido</li><li>Mostrar contenido de las tablas</li><li>Salir</li></ol></div>
+<div class="arrow">opción 2<br>→</div>
+<div class="box sub"><b>Submenú del pedido</b>
+<ol><li>Añadir detalle de producto <small>· se queda en el submenú</small></li>
+<li>Eliminar todos los detalles <small>· se queda en el submenú</small></li>
+<li>Cancelar pedido <small>· vuelve al menú principal</small></li>
+<li>Finalizar pedido <small>· vuelve al menú principal</small></li></ol></div>
+</div>
+<p class="small">Después de las opciones 1, 2 y 3 del submenú se muestra siempre el contenido de las tres tablas.</p>
+</section>
+<section id="op1"><h2><span>6</span>Opción 1 · Borrar y crear tablas e insertar stock inicial</h2>
+<p>Deja la base de datos en el estado inicial: borra las tres tablas si existen, las vuelve a crear vacías e inserta
+los 10 productos predefinidos en el código. Es lo primero que hay que hacer la primera vez, y también al empezar una demostración.</p>
+<div class="note danger"><b>Esta opción no se puede deshacer.</b> En Oracle, crear o borrar tablas (DDL) lleva un COMMIT implícito. Por eso el programa pide escribir <code>BORRAR</code> en mayúsculas antes de hacerlo. Se perderán todos los pedidos que hubiera.</div>
+<div class="step keepnext"><div class="num"><span>1</span></div><div><h4>Elige la opción 1 y confirma</h4><p>Escribe <code>1</code>, Intro, y después <code>BORRAR</code>, Intro.</p></div></div>
+<figure class="term app tall"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">1</b>
+Se borrarán STOCK, PEDIDO y DETALLE_PEDIDO. Escribe BORRAR: <b class="in">BORRAR</b>
+<span class="hl">Tablas creadas e insertadas las 10 tuplas de Stock.</span>
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+1         | 100
+2         | 80
+3         | 60
+4         | 40
+5         | 20
+6         | 150
+7         | 75
+8         | 50
+9         | 30
+10        | 10
+<span class="hl">(10 filas)</span>
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+-------------
+<span class="hl">(0 filas)</span>
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+<span class="hl">(0 filas)</span></pre><figcaption><b>Captura 5.</b> Tablas recién creadas: STOCK con sus 10 productos, y PEDIDO y DETALLE_PEDIDO vacías.</figcaption></figure>
+<div class="pair"><div class="step"><div class="num"><span>2</span></div><div><h4>Si te arrepientes, escribe cualquier otra cosa</h4><p>Cualquier respuesta distinta de <code>BORRAR</code> deja todo como estaba y vuelve al menú.</p></div></div><figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">1</b>
+Se borrarán STOCK, PEDIDO y DETALLE_PEDIDO. Escribe BORRAR: <b class="in">no</b>
+
+1. Borrar y crear tablas e insertar stock inicial
+2. Dar de alta nuevo pedido
+3. Mostrar contenido de las tablas
+4. Salir
+Opción:</pre><figcaption><b>Captura 6.</b> Respuesta distinta de BORRAR: no se hace nada y vuelve el menú principal.</figcaption></figure></div>
+<p>Este es el stock inicial, definido en <code>STOCK_INITIAL</code> dentro de <code>seminario/orders.py</code>:</p>
+<table class="narrow"><thead><tr><th>Producto</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr></thead>
+<tbody><tr><th>Cantidad</th><td>100</td><td>80</td><td>60</td><td>40</td><td>20</td><td>150</td><td>75</td><td>50</td><td>30</td><td>10</td></tr></tbody></table>
+</section>
+<section id="op3"><h2><span>7</span>Opción 3 · Mostrar contenido de las tablas</h2>
+<p>Muestra las tres tablas completas, ordenadas por código. No cambia nada; se puede usar en cualquier momento desde
+el menú principal. La captura es del final de la demostración de esta guía, con un pedido ya confirmado.</p>
+<figure class="term app tall"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">3</b>
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+1         | 92
+2         | 80
+3         | 60
+4         | 40
+5         | 20
+6         | 150
+7         | 75
+8         | 50
+9         | 30
+10        | 0
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+--------------------
+<span class="hl">1001    | 20       | 2026-11-12 00:00:00</span>
+(1 filas)
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+<span class="hl">1001    | 1         | 8</span>
+<span class="hl">1001    | 10        | 10</span>
+(2 filas)</pre><figcaption><b>Captura 7.</b> Opción 3. Debajo de cada tabla se indica cuántas filas tiene.</figcaption></figure>
+</section>
+<section id="op2"><h2><span>8</span>Opción 2 · Dar de alta un nuevo pedido</h2>
+<p>Es la parte central del seminario. Todo el alta es <b>una única transacción</b>: empieza al insertar la cabecera
+del pedido y termina cuando se finaliza (COMMIT) o se cancela (ROLLBACK).</p>
+<p>Para ver el efecto de las transacciones conviene tener <b>dos ventanas</b>: la aplicación y un cliente de consulta
+(doble clic en <code>Consultar.command</code>; se explica en el <a href="#consulta">apartado 11</a>). El cliente de
+consulta es otra sesión de Oracle, así que solo ve lo que ya está confirmado.</p>
+
+<h3>8.1 · Datos del pedido</h3>
+<div class="pair"><div class="step"><div class="num"><span>1</span></div><div><h4>Elige la opción 2 e introduce los datos</h4><p>El programa pide tres datos:</p>
+     <ul><li><b>Código de pedido</b>: un número entero que no esté ya usado.</li>
+     <li><b>Código de cliente</b>: un número entero.</li>
+     <li><b>Fecha</b>: con formato <code>AAAA-MM-DD</code>, o Intro para usar la de hoy.</li></ul>
+     <p>Los números deben estar entre 1 y 999999999. Si escribes algo no válido, se explica el motivo y se vuelve a preguntar.</p></div></div><figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">2</b>
+Código de pedido: <b class="in">abc</b>
+<span class="hl">Debe ser un entero entre 1 y 999999999.</span>
+Código de pedido: <b class="in">-5</b>
+<span class="hl">Debe ser un entero entre 1 y 999999999.</span>
+Código de pedido: <b class="in">1001</b>
+Código de cliente: <b class="in">20</b>
+Fecha (AAAA-MM-DD, Intro = hoy): <b class="in">31/12/2026</b>
+<span class="hl">Introduce una fecha válida en formato AAAA-MM-DD.</span>
+Fecha (AAAA-MM-DD, Intro = hoy): <b class="in">[Intro]</b>
+
+1. Añadir detalle de producto
+2. Eliminar todos los detalles de producto
+3. Cancelar pedido
+4. Finalizar pedido
+Opción:</pre><figcaption><b>Captura 8.</b> Datos del pedido 1001 del cliente 20, con tres entradas no válidas rechazadas por el camino. Al aceptar la fecha se inserta la cabecera en PEDIDO y aparece el submenú.</figcaption></figure></div>
+<div class="note info"><b>Qué ha pasado en Oracle.</b> Se ha ejecutado <code>INSERT INTO PEDIDO</code>, que abre la transacción, y justo después <code>SAVEPOINT pedido_sin_detalles</code>. Ese punto guardado es al que se vuelve con «Eliminar todos los detalles».</div>
+<h3>8.2 · Submenú 1 · Añadir detalle de producto</h3>
+<div class="pair"><div class="step"><div class="num"><span>2</span></div><div><h4>Añade un producto al pedido</h4><p>Escribe <code>1</code>, después el código del producto y la cantidad. Si hay stock suficiente, se descuenta del stock y se añade la línea al pedido. A continuación se muestran las tres tablas.</p></div></div><figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">1</b>
+Código de producto: <b class="in">1</b>
+Cantidad: <b class="in">7</b>
+<span class="hl">Detalle añadido. Cambios pendientes de confirmar.</span>
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+<span class="hl">1         | 93</span>
+2         | 80
+<span class="dim">···</span>
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+--------------------
+<span class="hl">1001    | 20       | 2026-11-12 00:00:00</span>
+(1 filas)
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+<span class="hl">1001    | 1         | 7</span>
+(1 filas)</pre><figcaption><b>Captura 9.</b> Se añaden 7 unidades del producto 1: su stock baja de 100 a 93 y aparecen la cabecera y la línea del pedido. Son cambios pendientes de confirmar.</figcaption></figure></div>
+<div class="pair"><div class="step"><div class="num"><span>3</span></div><div><h4>Mira lo mismo desde la otra ventana</h4><p>En el cliente de consulta, pulsa Intro para actualizar. Como todavía no ha habido COMMIT, la otra sesión no ve nada de lo anterior.</p></div></div><figure class="term obs"><div class="bar"><i></i><i></i><i></i><span>Ventana 2 · Cliente de consulta — ./ejecutar.sh --consulta</span></div><pre>Intro = actualizar; q = salir: <b class="in">[Intro]</b>
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+<span class="hl">1         | 100</span>
+2         | 80
+<span class="dim">···</span>
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+-------------
+<span class="hl">(0 filas)</span>
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+<span class="hl">(0 filas)</span></pre><figcaption><b>Captura 10.</b> La otra sesión sigue viendo stock 100 del producto 1 y ningún pedido. Esto es lo que demuestra que la transacción está abierta.</figcaption></figure></div>
+<div class="pair"><div class="step"><div class="num"><span>4</span></div><div><h4>Prueba a pedir más de lo que hay</h4><p>Quedan 93 unidades del producto 1. Si pides 94, la línea se rechaza y el pedido se queda como estaba.</p></div></div><figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">1</b>
+Código de producto: <b class="in">1</b>
+Cantidad: <b class="in">94</b>
+<span class="hl">No se añadió el detalle: Producto inexistente o stock insuficiente.</span>
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+<span class="hl">1         | 93</span>
+2         | 80
+<span class="dim">···</span>
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+--------------------
+1001    | 20       | 2026-11-12 00:00:00
+(1 filas)
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+<span class="hl">1001    | 1         | 7</span>
+(1 filas)</pre><figcaption><b>Captura 11.</b> Stock insuficiente: no se añade nada, el stock sigue en 93 y la línea anterior de 7 unidades se conserva.</figcaption></figure></div>
+<div class="pair"><div class="step"><div class="num"><span>5</span></div><div><h4>Prueba con un producto que no existe</h4><p>El mismo mensaje aparece si el código de producto no está en STOCK.</p></div></div><figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">1</b>
+Código de producto: <b class="in">99</b>
+Cantidad: <b class="in">1</b>
+<span class="hl">No se añadió el detalle: Producto inexistente o stock insuficiente.</span>
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+1         | 93
+2         | 80
+<span class="dim">···</span>
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+--------------------
+1001    | 20       | 2026-11-12 00:00:00
+(1 filas)
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+1001    | 1         | 7
+(1 filas)</pre><figcaption><b>Captura 12.</b> Producto 99, que no existe: se rechaza la línea y el pedido no cambia.</figcaption></figure></div>
+<div class="note info"><b>Qué ha pasado en Oracle.</b> Cada línea empieza con <code>SAVEPOINT antes_detalle</code>. Un único <code>UPDATE STOCK … WHERE CANTIDAD &gt;= ?</code> comprueba y descuenta a la vez. Si no modifica ninguna fila (no hay stock o no existe el producto), o si falla el <code>INSERT</code> del detalle, se hace <code>ROLLBACK TO antes_detalle</code>: se deshace solo esa línea.</div>
+<h3>8.3 · Submenú 2 · Eliminar todos los detalles de producto</h3>
+<div class="pair"><div class="step"><div class="num"><span>6</span></div><div><h4>Vacía el pedido sin cancelarlo</h4><p>Escribe <code>2</code>. Desaparecen todas las líneas del pedido y el stock vuelve a su valor, pero la cabecera del pedido se conserva y sigues en el submenú para volver a añadir productos.</p></div></div><figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">2</b>
+<span class="hl">Detalles eliminados y stock repuesto; se conserva la cabecera.</span>
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+<span class="hl">1         | 100</span>
+2         | 80
+<span class="dim">···</span>
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+--------------------
+<span class="hl">1001    | 20       | 2026-11-12 00:00:00</span>
+(1 filas)
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+<span class="hl">(0 filas)</span></pre><figcaption><b>Captura 13.</b> Tras eliminar los detalles: stock del producto 1 otra vez a 100, el pedido 1001 sigue en PEDIDO y DETALLE_PEDIDO está vacía.</figcaption></figure></div>
+<div class="note info"><b>Qué ha pasado en Oracle.</b> <code>ROLLBACK TO pedido_sin_detalles</code>. Se deshace todo lo hecho después de ese savepoint (líneas y descuentos de stock), pero la transacción sigue activa. Un simple <code>DELETE</code> de las líneas no devolvería el stock.</div>
+<h3>8.4 · Más detalles: productos repetidos y stock a cero</h3>
+<div class="pair"><div class="step"><div class="num"><span>7</span></div><div><h4>Añade el mismo producto dos veces</h4><p>Si un producto ya está en el pedido, la cantidad se suma a su línea en vez de crear otra. Aquí se han añadido 5 unidades del producto 1 y después otras 3.</p></div></div><figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">1</b>
+Código de producto: <b class="in">1</b>
+Cantidad: <b class="in">3</b>
+Detalle añadido. Cambios pendientes de confirmar.
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+<span class="hl">1         | 92</span>
+2         | 80
+<span class="dim">···</span>
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+--------------------
+1001    | 20       | 2026-11-12 00:00:00
+(1 filas)
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+<span class="hl">1001    | 1         | 8</span>
+(1 filas)</pre><figcaption><b>Captura 14.</b> Segunda vez que se añade el producto 1 (5 + 3): hay una sola línea con 8 unidades y el stock queda en 92.</figcaption></figure></div>
+<div class="step keepnext"><div class="num"><span>8</span></div><div><h4>Agota el stock de un producto</h4><p>Se puede pedir exactamente todo lo que queda. El stock puede llegar a 0, pero nunca ser negativo.</p></div></div>
+<figure class="term app tall"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">1</b>
+Código de producto: <b class="in">10</b>
+Cantidad: <b class="in">10</b>
+Detalle añadido. Cambios pendientes de confirmar.
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+1         | 92
+<span class="dim">···</span>
+9         | 30
+<span class="hl">10        | 0</span>
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+--------------------
+1001    | 20       | 2026-11-12 00:00:00
+(1 filas)
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+1001    | 1         | 8
+<span class="hl">1001    | 10        | 10</span>
+(2 filas)</pre><figcaption><b>Captura 15.</b> Se piden las 10 unidades del producto 10: su stock queda a 0 y el pedido tiene ya dos líneas.</figcaption></figure>
+<h3>8.5 · Submenú 4 · Finalizar pedido</h3>
+<div class="pair"><div class="step"><div class="num"><span>9</span></div><div><h4>Confirma el pedido</h4><p>Escribe <code>4</code>. Los cambios pasan a ser permanentes y se vuelve al menú principal. Esta opción no muestra las tablas; puedes verlas con la opción 3.</p></div></div><figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">4</b>
+<span class="hl">Pedido confirmado (COMMIT).</span>
+
+1. Borrar y crear tablas e insertar stock inicial
+2. Dar de alta nuevo pedido
+3. Mostrar contenido de las tablas
+4. Salir
+Opción:</pre><figcaption><b>Captura 16.</b> Finalizar: COMMIT y vuelta al menú principal.</figcaption></figure></div>
+<div class="pair"><div class="step"><div class="num"><span>10</span></div><div><h4>Compruébalo desde la otra ventana</h4><p>Pulsa Intro en el cliente de consulta: ahora sí aparece todo.</p></div></div><figure class="term obs"><div class="bar"><i></i><i></i><i></i><span>Ventana 2 · Cliente de consulta — ./ejecutar.sh --consulta</span></div><pre>Intro = actualizar; q = salir: <b class="in">[Intro]</b>
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+<span class="hl">1         | 92</span>
+<span class="dim">···</span>
+9         | 30
+<span class="hl">10        | 0</span>
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+--------------------
+<span class="hl">1001    | 20       | 2026-11-12 00:00:00</span>
+(1 filas)
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+<span class="hl">1001    | 1         | 8</span>
+<span class="hl">1001    | 10        | 10</span>
+(2 filas)</pre><figcaption><b>Captura 17.</b> Después del COMMIT, la otra sesión ve el pedido 1001, sus dos líneas y el stock descontado.</figcaption></figure></div>
+<div class="note info"><b>Qué ha pasado en Oracle.</b> <code>COMMIT</code>: fin de la transacción. A partir de aquí ya no se puede deshacer con ROLLBACK.</div>
+<h3>8.6 · Submenú 3 · Cancelar pedido</h3>
+<div class="step keepnext"><div class="num"><span>11</span></div><div><h4>Empieza otro pedido y añade algo</h4><p>Pedido 1002, esta vez escribiendo la fecha a mano, con 30 unidades del producto 2.</p></div></div>
+<figure class="term app tall"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">2</b>
+Código de pedido: <b class="in">1002</b>
+Código de cliente: <b class="in">20</b>
+Fecha (AAAA-MM-DD, Intro = hoy): <b class="in">2026-11-20</b>
+
+1. Añadir detalle de producto
+2. Eliminar todos los detalles de producto
+3. Cancelar pedido
+4. Finalizar pedido
+Opción: <b class="in">1</b>
+Código de producto: <b class="in">2</b>
+Cantidad: <b class="in">30</b>
+Detalle añadido. Cambios pendientes de confirmar.
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+1         | 92
+<span class="hl">2         | 50</span>
+3         | 60
+<span class="dim">···</span>
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+--------------------
+1001    | 20       | 2026-11-12 00:00:00
+<span class="hl">1002    | 20       | 2026-11-20 00:00:00</span>
+(2 filas)
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+1001    | 1         | 8
+1001    | 10        | 10
+<span class="hl">1002    | 2         | 30</span>
+(3 filas)</pre><figcaption><b>Captura 18.</b> Pedido 1002 a medias: el stock del producto 2 ha bajado de 80 a 50.</figcaption></figure>
+<div class="pair"><div class="step"><div class="num"><span>12</span></div><div><h4>Cancélalo</h4><p>Escribe <code>3</code>. Desaparece el pedido entero (cabecera y líneas), el stock vuelve a su valor, se muestran las tablas y se vuelve al menú principal.</p></div></div><figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">3</b>
+<span class="hl">Pedido cancelado (ROLLBACK).</span>
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+1         | 92
+<span class="hl">2         | 80</span>
+3         | 60
+<span class="dim">···</span>
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+--------------------
+1001    | 20       | 2026-11-12 00:00:00
+(1 filas)
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+1001    | 1         | 8
+1001    | 10        | 10
+(2 filas)</pre><figcaption><b>Captura 19.</b> Tras cancelar: no queda rastro del pedido 1002 y el producto 2 vuelve a tener 80. El pedido 1001, ya confirmado, sigue ahí.</figcaption></figure></div>
+<div class="note info"><b>Qué ha pasado en Oracle.</b> <code>ROLLBACK</code>: se deshace la transacción completa, incluida la cabecera. Lo confirmado antes no se ve afectado.</div>
+</section>
+<section id="errores"><h2><span>9</span>Errores y casos especiales</h2>
+<h3>Código de pedido repetido</h3>
+<p>El código de pedido es la clave primaria. Si usas uno que ya existe, Oracle rechaza el INSERT, el programa
+cancela el alta y vuelve al menú principal. El pedido que ya existía no se toca.</p>
+<figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">2</b>
+Código de pedido: <b class="in">1001</b>
+Código de cliente: <b class="in">33</b>
+Fecha (AAAA-MM-DD, Intro = hoy): <b class="in">[Intro]</b>
+<span class="hl">Operación interrumpida: Ya existe ese código de pedido. Utiliza otro.</span></pre><figcaption><b>Captura 20.</b> Se intenta crear otra vez el pedido 1001, que ya está confirmado.</figcaption></figure>
+<h3>Opción que no existe</h3>
+<p>En cualquiera de los dos menús, un número fuera de 1–4 (o cualquier otro texto) muestra un aviso y vuelve a preguntar.</p>
+<figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: <b class="in">7</b>
+<span class="hl">Opción no válida.</span></pre><figcaption><b>Captura 21.</b> Opción no válida en el menú principal.</figcaption></figure>
+<h3>Cerrar el programa a mitad de un pedido</h3>
+<p>Si pulsas <kbd>Ctrl</kbd>+<kbd>C</kbd> (o cierras la entrada con <kbd>Ctrl</kbd>+<kbd>D</kbd>) con un pedido a medias,
+el programa deshace lo pendiente y cierra la conexión. En la captura se había empezado el pedido 1003 con 60 unidades del producto 3.</p>
+<figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>Opción: ^C
+<span class="hl">Salida solicitada. Se deshace cualquier pedido sin confirmar.</span></pre><figcaption><b>Captura 22.</b> Ctrl+C en el submenú, con el pedido 1003 sin confirmar.</figcaption></figure>
+<figure class="term obs"><div class="bar"><i></i><i></i><i></i><span>Ventana 2 · Cliente de consulta — ./ejecutar.sh --consulta</span></div><pre>Intro = actualizar; q = salir: <b class="in">[Intro]</b>
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+1         | 92
+<span class="dim">···</span>
+<span class="hl">3         | 60</span>
+<span class="dim">···</span>
+10        | 0
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+--------------------
+1001    | 20       | 2026-11-12 00:00:00
+<span class="hl">(1 filas)</span>
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+1001    | 1         | 8
+1001    | 10        | 10
+(2 filas)</pre><figcaption><b>Captura 23.</b> Desde la otra sesión: el producto 3 conserva sus 60 unidades y solo existe el pedido 1001. El 1003 nunca llegó a confirmarse.</figcaption></figure>
+<h3>Mensajes de error que puedes encontrarte</h3>
+<table><thead><tr><th>Mensaje</th><th>Qué significa</th><th>Qué hacer</th></tr></thead><tbody>
+<tr><td>Faltan tablas. Usa la opción 1 del menú principal para crearlas.</td><td>Las tablas aún no existen en tu cuenta.</td><td>Ejecuta la opción 1.</td></tr>
+<tr><td>Ya existe ese código de pedido. Utiliza otro.</td><td>Clave primaria repetida.</td><td>Repite el alta con otro código.</td></tr>
+<tr><td>Producto inexistente o stock insuficiente.</td><td>La línea no se puede servir.</td><td>Revisa el código de producto o pide menos cantidad.</td></tr>
+<tr><td>Usuario o contraseña Oracle incorrectos.</td><td>Oracle ha rechazado el inicio de sesión.</td><td>Revisa el usuario en <code>config.ini</code> y la contraseña.</td></tr>
+<tr><td>No se puede conectar. Revisa VPN/Eduroam, servidor, puerto y servicio.</td><td>El servidor no responde.</td><td>Conéctate a Eduroam o a la VPN.</td></tr>
+<tr><td>Debe ser un entero entre 1 y 999999999.</td><td>Has escrito letras, decimales, cero o un negativo.</td><td>Escribe un número entero positivo.</td></tr>
+</tbody></table>
+</section>
+<section id="op4"><h2><span>10</span>Opción 4 · Salir</h2>
+<p>Cierra el programa de forma ordenada: deshace cualquier cosa que hubiera quedado pendiente y cierra la conexión
+con Oracle. Es importante salir así (y no cerrando la ventana sin más) porque el servidor solo admite 3 o 4
+sesiones por usuario.</p>
+<figure class="term app"><div class="bar"><i></i><i></i><i></i><span>Ventana 1 · Aplicación — ./ejecutar.sh</span></div><pre>…
+4. Salir
+Opción: <b class="in">4</b></pre><figcaption><b>Captura 24.</b> Opción 4: el programa termina y la terminal vuelve a quedar libre.</figcaption></figure>
+</section>
+<section id="consulta"><h2><span>11</span>El cliente de consulta</h2>
+<p>En la defensa hay que enseñar el funcionamiento «a través de un cliente de consulta a la base de datos». Sirve
+cualquier programa que abra <b>otra sesión</b> con tu misma cuenta. El proyecto trae uno propio, que es lo más cómodo.</p>
+<h3>El cliente incluido</h3>
+<div class="pair"><div class="step"><div class="num"><span>1</span></div><div><h4>Ábrelo en una segunda ventana</h4><p>Doble clic en <code>Consultar.command</code>, o <code>./ejecutar.sh --consulta</code> en otra Terminal. Pide la contraseña y muestra las tres tablas.</p></div></div><figure class="term obs"><div class="bar"><i></i><i></i><i></i><span>Ventana 2 · Cliente de consulta — ./ejecutar.sh --consulta</span></div><pre>$ <b class="in">./ejecutar.sh --consulta</b>
+Contraseña Oracle (oculta):
+Conexión Oracle mediante ODBC establecida. Autocommit desactivado.
+<span class="hl">Cliente de consulta: sesión independiente. Solo muestra datos confirmados.</span>
+
+STOCK
+CPRODUCTO | CANTIDAD
+----------+---------
+1         | 100
+<span class="dim">···</span>
+10        | 10
+(10 filas)
+
+PEDIDO
+CPEDIDO | CCLIENTE | FECHA_PEDIDO
+--------+----------+-------------
+(0 filas)
+
+DETALLE_PEDIDO
+CPEDIDO | CPRODUCTO | CANTIDAD
+--------+-----------+---------
+(0 filas)
+Intro = actualizar; q = salir:</pre><figcaption><b>Captura 25.</b> Cliente de consulta recién abierto, justo después de reiniciar las tablas.</figcaption></figure></div>
+<div class="pair"><div class="step"><div class="num"><span>2</span></div><div><h4>Actualiza cuando quieras, y sal con q</h4><p>Cada vez que pulses Intro vuelve a leer las tablas. Escribe <code>q</code> para salir y cerrar su sesión.</p></div></div><figure class="term obs"><div class="bar"><i></i><i></i><i></i><span>Ventana 2 · Cliente de consulta — ./ejecutar.sh --consulta</span></div><pre>Intro = actualizar; q = salir: <b class="in">q</b></pre><figcaption><b>Captura 26.</b> Salir del cliente de consulta.</figcaption></figure></div>
+<h3>Con SQL Developer</h3>
+<ol><li>Crea una conexión nueva con estos datos (anexo I): nombre del host <code>oracle0.ugr.es</code>, puerto
+<code>1521</code>, nombre del servicio <code>practbd</code>, y tu usuario y contraseña de Oracle.</li>
+<li>Abre <code>sql/consultas.sql</code> y ejecútalo como script (F5) cada vez que quieras ver el estado de las tablas.</li></ol>
+<h3>Con SQL*Plus (ya instalado con el proyecto)</h3>
+<pre class="cmd">.local/instantclient/sqlplus /nolog
+SQL&gt; CONNECT tu_usuario@//oracle0.ugr.es:1521/practbd
+SQL&gt; @sql/consultas.sql
+SQL&gt; EXIT</pre>
+<div class="note warn"><b>Límite de sesiones.</b> Cada usuario puede tener 3 o 4 conexiones abiertas a la vez. Cierra los clientes al acabar. Si alguna se queda colgada (anexo II): <code>SELECT * FROM mis_sesiones;</code> para verlas y <code>EXECUTE mata_sesion(SID, SERIAL#);</code> para cerrar las que estén en INACTIVE.</div>
+</section>
+<section id="validar"><h2><span>12</span>Validación, pruebas y entrega</h2>
+<h3>Validación automática en Oracle</h3>
+<p>Hace sola, en unos segundos, lo mismo que la demostración manual: abre dos sesiones y comprueba qué ve cada una
+antes y después de COMMIT y ROLLBACK. Úsala para asegurarte de que todo funciona antes de la defensa.</p>
+<div class="note danger"><b>También reinicia las tablas.</b> Borra y vuelve a crear STOCK, PEDIDO y DETALLE_PEDIDO al empezar y al terminar, igual que la opción 1. Pide escribir <code>BORRAR</code>.</div>
+<figure class="term shell"><div class="bar"><i></i><i></i><i></i><span>Validar_Oracle.command</span></div><pre>$ <b class="in">./ejecutar.sh --probar-oracle</b>
+Esta validación BORRA y vuelve a crear STOCK, PEDIDO y DETALLE_PEDIDO.
+Escribe BORRAR para continuar: <b class="in">BORRAR</b>
+Contraseña Oracle (oculta):
+<span class="hl">OK: tablas creadas con 10 productos</span>
+<span class="hl">OK: la otra sesión no ve los cambios sin COMMIT</span>
+<span class="hl">OK: ROLLBACK TO conserva la cabecera, repone el stock y se puede repetir</span>
+<span class="hl">OK: COMMIT visible desde la otra sesión; cantidades acumuladas; sin stock se rechaza</span>
+<span class="hl">OK: ROLLBACK elimina el pedido y sus detalles y restaura el stock</span>
+<span class="hl">OK: un fallo al insertar deshace solo esa línea y su descuento de stock</span>
+<span class="hl">OK: código de pedido duplicado rechazado</span>
+<span class="hl">Validación Oracle completada. Tablas reiniciadas con el stock inicial.</span></pre><figcaption><b>Captura 27.</b> Las siete comprobaciones superadas. Si alguna fallara, se indicaría cuál, con el valor esperado y el obtenido.</figcaption></figure>
+<h3>Pruebas automáticas sin red</h3>
+<p>Comprueban la lógica del programa en un par de centésimas de segundo, sin conectarse a Oracle (usan SQLite como
+banco de pruebas). Son útiles después de tocar el código.</p>
+<figure class="term shell tall"><div class="bar"><i></i><i></i><i></i><span>Terminal</span></div><pre>$ <b class="in">.venv/bin/python -m unittest discover -s tests -v</b>
+test_cancel_restores_header_details_and_stock (test_orders.TransactionsTest.test_cancel_restores_header_details_and_stock)
+Cancelar: no queda ni cabecera ni detalles y el stock vuelve a su valor. ... ok
+test_clear_preserves_header_and_restores_all_stock (test_orders.TransactionsTest.test_clear_preserves_header_and_restores_all_stock)
+Eliminar detalles: se van los detalles, vuelve el stock, queda la cabecera. ... ok
+test_commit_and_independent_observer (test_orders.TransactionsTest.test_commit_and_independent_observer)
+Hasta el COMMIT, la otra sesión no ve ni el pedido ni el stock descontado. ... ok
+test_duplicate_order_does_not_modify_committed_data (test_orders.TransactionsTest.test_duplicate_order_does_not_modify_committed_data)
+Un código de pedido repetido se rechaza y el pedido confirmado no cambia. ... ok
+test_duplicate_order_in_menu_returns_to_main_menu (test_orders.TransactionsTest.test_duplicate_order_in_menu_returns_to_main_menu)
+Un error dentro del alta (código repetido) cancela y vuelve al menú principal. ... ok
+test_eof_leaves_work_uncommitted_for_outer_cleanup (test_orders.TransactionsTest.test_eof_leaves_work_uncommitted_for_outer_cleanup)
+Si el programa se interrumpe a mitad de un pedido, no se confirma nada. ... ok
+test_insert_error_rolls_back_just_current_line_and_stock (test_orders.TransactionsTest.test_insert_error_rolls_back_just_current_line_and_stock)
+Si falla el INSERT del detalle tras descontar el stock, el savepoint de ... ok
+test_integer_repeats_until_valid (test_orders.TransactionsTest.test_integer_repeats_until_valid)
+La entrada de números rechaza todo lo que no sea un entero entre 1 y 999999999. ... ok
+test_menu_add_clear_cancel_always_displays_tables (test_orders.TransactionsTest.test_menu_add_clear_cancel_always_displays_tables)
+El enunciado exige mostrar la BD después de las opciones 1, 2 y 3 del submenú. ... ok
+test_missing_product_and_insufficient_stock_keep_previous_lines (test_orders.TransactionsTest.test_missing_product_and_insufficient_stock_keep_previous_lines)
+Una línea rechazada (sin stock o producto inexistente) no afecta a las anteriores. ... ok
+test_oracle_connection_format (test_orders.TransactionsTest.test_oracle_connection_format)
+Formato de la cadena de conexión ODBC y rechazo del punto y coma. ... ok
+test_same_product_accumulates_and_stock_can_reach_zero (test_orders.TransactionsTest.test_same_product_accumulates_and_stock_can_reach_zero)
+El mismo producto dos veces da una sola línea con la suma; el stock puede llegar a 0. ... ok
+test_show_tables (test_orders.TransactionsTest.test_show_tables)
+Mostrar tablas imprime las 10 filas de Stock. ... ok
+
+----------------------------------------------------------------------
+<span class="hl">Ran 13 tests in 0.030s</span>
+
+<span class="hl">OK</span></pre><figcaption><b>Captura 28.</b> Las 13 pruebas, cada una con una frase que explica qué comprueba.</figcaption></figure>
+<h3>Generar la memoria y el ZIP de entrega</h3>
+<div class="step"><div class="num"><span>1</span></div><div><h4>Rellena el reparto de trabajo</h4><p>Edita <code>docs/equipo.json</code> y sustituye cada «Pendiente de indicar el reparto real» por lo que ha hecho esa persona.</p></div></div>
+<div class="pair"><div class="step"><div class="num"><span>2</span></div><div><h4>Genera la entrega</h4><p>La primera vez hay que instalar la biblioteca que crea el PDF:</p>
+     <pre class="cmd">.venv/bin/python -m pip install -r requirements-docs.txt
+.venv/bin/python scripts/preparar_entrega.py</pre>
+     <p>El script ejecuta las pruebas (si alguna falla, no genera nada), escribe <code>docs/Memoria_D2.pdf</code> y
+     crea <code>entrega/Seminario1_DDSI_D2.zip</code> con la memoria y el código, sin tu configuración ni contraseñas.</p></div></div><figure class="term shell"><div class="bar"><i></i><i></i><i></i><span>Terminal</span></div><pre>$ <b class="in">.venv/bin/python scripts/preparar_entrega.py</b>
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 0.028s
+
+OK
+<span class="hl">PDF: docs/Memoria_D2.pdf</span>
+<span class="hl">ZIP: entrega/Seminario1_DDSI_D2.zip</span>
+
+<span class="hl">AVISO: falta el reparto real de trabajo. Rellena docs/equipo.json y vuelve a ejecutar este script antes de entregar.</span></pre><figcaption><b>Captura 29.</b> Generación de la entrega. El aviso final aparece mientras el reparto de trabajo siga sin rellenar.</figcaption></figure></div>
+<div class="step"><div class="num"><span>3</span></div><div><h4>Sube el ZIP a Prado</h4><p>El fichero es <code>entrega/Seminario1_DDSI_D2.zip</code>.</p></div></div>
+</section>
+<section id="resumen"><h2><span>13</span>Resumen: qué SQL hay detrás de cada opción</h2>
+<table><thead><tr><th>Lo que haces</th><th>Función</th><th>Lo que se ejecuta en Oracle</th><th>¿Lo ve la otra sesión?</th></tr></thead><tbody>
+<tr><td>Arrancar</td><td><code>connect</code> · db.py</td><td>Conexión ODBC con <code>autocommit=False</code></td><td>—</td></tr>
+<tr><td>Menú 1 · Crear tablas</td><td><code>Orders.reset</code></td><td><code>DROP TABLE</code> ×3, <code>CREATE TABLE</code> ×3, <code>INSERT</code> ×10, <code>COMMIT</code></td><td>Sí, al momento</td></tr>
+<tr><td>Menú 2 · Datos del pedido</td><td><code>Orders.begin</code></td><td><code>INSERT INTO PEDIDO</code> + <code>SAVEPOINT pedido_sin_detalles</code></td><td>No</td></tr>
+<tr><td>Submenú 1 · Añadir detalle</td><td><code>Orders.add</code></td><td><code>SAVEPOINT antes_detalle</code>, <code>UPDATE STOCK</code>, <code>UPDATE</code> o <code>INSERT</code> en DETALLE_PEDIDO; si falla, <code>ROLLBACK TO antes_detalle</code></td><td>No</td></tr>
+<tr><td>Submenú 2 · Eliminar detalles</td><td><code>Orders.clear</code></td><td><code>ROLLBACK TO pedido_sin_detalles</code></td><td>No</td></tr>
+<tr><td>Submenú 3 · Cancelar</td><td><code>Orders.cancel</code></td><td><code>ROLLBACK</code></td><td>Nunca llega a verlo</td></tr>
+<tr><td>Submenú 4 · Finalizar</td><td><code>Orders.finish</code></td><td><code>COMMIT</code></td><td>Sí, desde ahora</td></tr>
+<tr><td>Menú 3 · Mostrar tablas</td><td><code>show_tables</code> · db.py</td><td><code>SELECT</code> ×3</td><td>—</td></tr>
+<tr><td>Menú 4 · Salir, Ctrl+C</td><td>final de <code>main</code></td><td><code>ROLLBACK</code> de lo pendiente y cierre de la conexión</td><td>—</td></tr>
+</tbody></table>
+<h3>La vida de un pedido, en una línea</h3>
+<div class="timeline">
+<div><b>INSERT PEDIDO</b><small>empieza la transacción</small></div>
+<div class="sp"><b>SAVEPOINT</b><small>pedido_sin_detalles</small></div>
+<div><b>Añadir detalles</b><small>cada uno con su savepoint</small></div>
+<div class="back"><b>Eliminar detalles</b><small>↩ vuelve al savepoint</small></div>
+<div class="end ok"><b>COMMIT</b><small>finalizar</small></div>
+<div class="end ko"><b>ROLLBACK</b><small>cancelar o salir</small></div>
+</div>
+</section>
+<section id="problemas"><h2><span>14</span>Problemas frecuentes</h2>
+<table><thead><tr><th>Qué pasa</th><th>Causa probable</th><th>Solución</th></tr></thead><tbody>
+<tr><td>«Primero ejecuta ./configurar.sh»</td><td>No existe la carpeta <code>.venv</code>.</td><td>Ejecuta <code>./configurar.sh</code>.</td></tr>
+<tr><td>«No se puede conectar…» o se queda esperando unos segundos</td><td>No estás en Eduroam ni en la VPN.</td><td>Conéctate y vuelve a intentarlo.</td></tr>
+<tr><td>«Usuario o contraseña Oracle incorrectos»</td><td>El usuario de <code>config.ini</code> no es el de Oracle, o la contraseña no es la actual.</td><td>Repite <code>Configurar_cuenta.command</code>. Si olvidaste la contraseña, consulta al profesor.</td></tr>
+<tr><td>Error que menciona «Can't open lib» o que no encuentra el driver</td><td>Falta el Instant Client en <code>.local</code>.</td><td>Ejecuta <code>./configurar.sh</code> de nuevo.</td></tr>
+<tr><td>Oracle rechaza la conexión por demasiadas sesiones</td><td>Quedan clientes abiertos o sesiones colgadas.</td><td>Cierra los clientes; si no basta, usa <code>mis_sesiones</code> y <code>mata_sesion</code> (apartado 11).</td></tr>
+<tr><td>Al hacer doble clic en un <code>.command</code>, macOS dice que no tiene permiso</td><td>El fichero ha perdido el permiso de ejecución (por ejemplo, al descomprimir un ZIP).</td><td>En la Terminal: <code>chmod +x *.sh *.command</code>.</td></tr>
+<tr><td>«Faltan tablas…»</td><td>Es la primera vez que usas el programa con esa cuenta.</td><td>Opción 1 del menú principal.</td></tr>
+</tbody></table>
+<p class="small">Para preparar la demostración de la defensa y las preguntas habituales del profesor, consulta <code>docs/DEFENSA.md</code>.</p>
+</section>
+</main></body></html>

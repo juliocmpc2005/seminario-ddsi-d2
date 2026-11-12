@@ -3,6 +3,29 @@
 Todo el grupo debe poder explicar todos los módulos. Estos pasos permiten mostrar
 las operaciones exigidas desde la aplicación y desde un cliente independiente.
 
+## Antes de empezar
+
+- Eduroam o VPN de la UGR. Datos de conexión para SQL Developer (anexo I):
+  servidor `oracle0.ugr.es`, puerto `1521`, servicio `practbd`.
+- El enunciado pide enseñar el funcionamiento con un **cliente de consulta**.
+  Sirve SQL Developer (ejecutando `sql/consultas.sql`), SQL*Plus o
+  `Consultar.command`. Lo importante es que sea otra sesión distinta.
+- Máximo 3 o 4 sesiones por usuario (anexo II). Si alguna se queda colgada:
+  `SELECT * FROM mis_sesiones;` y `EXECUTE mata_sesion(SID, SERIAL#);`.
+
+## Dónde está cada cosa en el código
+
+| Operación | Función | Sentencia |
+| --- | --- | --- |
+| Conexión ODBC sin autocommit | `connect` en `db.py` | `pyodbc.connect(..., autocommit=False)` |
+| Crear tablas y stock | `Orders.reset` | `DROP`, `CREATE`, `INSERT`, `COMMIT` |
+| Datos del pedido | `Orders.begin` | `INSERT` + `SAVEPOINT pedido_sin_detalles` |
+| 1. Añadir detalle | `Orders.add` | `SAVEPOINT antes_detalle`, `UPDATE` stock, `INSERT` detalle |
+| 2. Eliminar detalles | `Orders.clear` | `ROLLBACK TO pedido_sin_detalles` |
+| 3. Cancelar | `Orders.cancel` | `ROLLBACK` |
+| 4. Finalizar | `Orders.finish` | `COMMIT` |
+| Salir | final de `main` en `__main__.py` | `ROLLBACK` de lo pendiente y `close()` |
+
 ## Demostración
 
 1. Ejecuta la aplicación y usa opción 1; escribe `BORRAR`. Comprueba las 10 filas
@@ -64,9 +87,16 @@ de forma conjunta. Una vez confirmado, un rollback posterior no los deshace.
   atómica. No se supone que todo error SQL cancele toda la transacción.
 - **¿Por qué el reinicio está fuera del alta?** El DDL de Oracle hace commits
   implícitos. Ejecutarlo en mitad de un pedido podría confirmar datos pendientes.
-- **¿Cómo se cierra?** Se solicita un rollback explícito de lo pendiente y se
-  cierra la conexión incluso ante EOF o Ctrl+C. Los cursores se cierran sin usar
-  un contexto de conexión que pueda confirmar cambios automáticamente.
+- **¿Cómo se cierra?** Al salir (opción 4, Ctrl+C o un error) se hace un rollback
+  explícito de lo pendiente y se cierra la conexión, para no dejar sesiones
+  colgadas en el servidor.
+- **¿Por qué dos savepoints?** `pedido_sin_detalles` es el que pide el enunciado
+  para la opción 2. `antes_detalle` hace atómica cada línea: si falla el INSERT
+  del detalle después de descontar el stock, se devuelve ese stock sin perder
+  las líneas anteriores.
+- **¿Por qué las pruebas usan SQLite?** Solo para comprobar la lógica rápido y
+  sin red. La aplicación usa siempre Oracle, y `Validar_Oracle.command` repite
+  las comprobaciones en Oracle con dos sesiones.
 - **¿Qué es ODBC aquí?** Python llama a pyodbc; pyodbc usa unixODBC, que carga
   el controlador Oracle. Este se conecta al listener y al servicio `practbd`.
 - **¿Por qué los valores usan `?`?** El driver enlaza los datos separados del
@@ -74,8 +104,8 @@ de forma conjunta. Una vez confirmado, un rollback posterior no los deshace.
 
 ## Antes de entregar
 
-Completa el reparto real en `docs/equipo.json`. Si necesitas repetir la validación,
-ejecuta `Validar_Oracle.command`. Regenera el PDF y el ZIP con
+Completa el reparto real en `docs/equipo.json`. Ejecuta `Validar_Oracle.command`
+para comprobar que todo funciona en Oracle. Regenera el PDF y el ZIP con
 `.venv/bin/python scripts/preparar_entrega.py`. Practicad la demostración entre
 todos y subid el ZIP a Prado. La memoria debe reflejar el trabajo real de cada
 persona, incluida la revisión y comprensión del código asistido.
