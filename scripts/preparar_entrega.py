@@ -125,7 +125,8 @@ def build_zip(pdf, archive_path):
     files += ROOT.glob("*.command")
     for directory in ("seminario", "scripts", "tests", "sql", "docs"):
         files += (path for path in (ROOT / directory).rglob("*")
-                  if path.is_file() and "__pycache__" not in path.parts)
+                  if path.is_file() and "__pycache__" not in path.parts
+                  and path != ROOT / "docs" / "DEFENSA.md")
     base = archive_path.stem  # Carpeta raíz dentro del ZIP.
     with ZipFile(archive_path, "w", compression=ZIP_DEFLATED) as archive:
         # La memoria también va en la raíz del ZIP para que se vea nada más abrirlo.
