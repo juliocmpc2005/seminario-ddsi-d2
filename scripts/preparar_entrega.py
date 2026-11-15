@@ -4,10 +4,11 @@
     .venv/bin/python -m pip install -r requirements-docs.txt   (solo la primera vez)
     .venv/bin/python scripts/preparar_entrega.py
 
-Pasos: 1) ejecuta las pruebas y se detiene si alguna falla; 2) escribe
-docs/Memoria_<subgrupo>.pdf con el texto de este fichero y el reparto de
-docs/equipo.json; 3) crea entrega/Seminario1_DDSI_<subgrupo>.zip.
+Pasos: 1) ejecuta las pruebas y se detiene si alguna falla; 2) conserva la
+memoria PDF existente del grupo; 3) crea entrega/Seminario1_DDSI_<subgrupo>.zip.
+Solo --regenerar-memoria sustituye el PDF por la plantilla de este fichero.
 """
+import argparse
 import json
 from pathlib import Path
 import subprocess
@@ -134,10 +135,17 @@ def build_zip(pdf, archive_path):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Prepara el ZIP conservando la memoria PDF del grupo.")
+    parser.add_argument("--regenerar-memoria", action="store_true",
+                        help="Sustituye el PDF existente por la plantilla automática; usar solo si se desea reemplazarlo.")
+    args = parser.parse_args()
     run_tests()
     team = json.loads((ROOT / "docs" / "equipo.json").read_text(encoding="utf-8"))
     pdf = ROOT / "docs" / f"Memoria_{team['subgrupo']}.pdf"
-    build_pdf(team, pdf)
+    if args.regenerar_memoria:
+        build_pdf(team, pdf)
+    elif not pdf.is_file():
+        raise SystemExit(f"Falta la memoria {pdf}. Copia el PDF del grupo o usa --regenerar-memoria para crear una plantilla.")
     (ROOT / "entrega").mkdir(exist_ok=True)
     archive_path = ROOT / "entrega" / f"Seminario1_DDSI_{team['subgrupo']}.zip"
     build_zip(pdf, archive_path)

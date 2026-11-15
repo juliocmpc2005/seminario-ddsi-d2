@@ -20,7 +20,7 @@ Repositorio: <https://github.com/juliocmpc2005/seminario-ddsi-d2>
 | `tests/oracle_integration.py` | Validación real en Oracle con dos sesiones. |
 | `docs/GUIA_DE_USO.html` / `.pdf` | Guía de uso paso a paso, con capturas, y estructura del proyecto. |
 | `docs/DEFENSA.md` | Guion de la demostración y preguntas habituales. |
-| `docs/equipo.json` | Integrantes y reparto de trabajo (va a la memoria). |
+| `docs/equipo.json` | Integrantes y reparto de trabajo reflejados en la memoria del grupo. |
 | `scripts/` | Instalación del driver de Oracle, configuración del usuario y generación de memoria + ZIP. |
 | `configurar.sh`, `ejecutar.sh`, `*.command` | Instalación y arranque. |
 
@@ -89,8 +89,9 @@ validación en Oracle (`./ejecutar.sh --probar-oracle`).
 
 ## Entrega
 
-1. Rellenar el reparto real de trabajo en `docs/equipo.json`.
-2. Generar memoria y ZIP:
+1. Revisar `docs/Memoria_D2.pdf`, la memoria aportada por el grupo, y el reparto
+   recogido en `docs/equipo.json`.
+2. Preparar el ZIP conservando ese PDF:
 
    ```sh
    .venv/bin/python -m pip install -r requirements-docs.txt
@@ -99,6 +100,12 @@ validación en Oracle (`./ejecutar.sh --probar-oracle`).
 
 3. Subir a Prado `entrega/Seminario1_DDSI_D2.zip` (contiene la memoria PDF y el
    código, sin configuración personal ni contraseñas).
+
+El script conserva la memoria existente. Solo la opción `--regenerar-memoria`
+la sustituye por una plantilla automática; no se necesita para preparar la entrega
+con el PDF del grupo.
+
+[Descargar el ZIP y la memoria actualizados](https://github.com/juliocmpc2005/seminario-ddsi-d2/releases/latest).
 
 ## Fuentes
 

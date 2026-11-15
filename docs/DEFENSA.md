@@ -104,8 +104,9 @@ de forma conjunta. Una vez confirmado, un rollback posterior no los deshace.
 
 ## Antes de entregar
 
-Completa el reparto real en `docs/equipo.json`. Ejecuta `Validar_Oracle.command`
-para comprobar que todo funciona en Oracle. Regenera el PDF y el ZIP con
+Revisa la memoria del grupo en `docs/Memoria_D2.pdf` y el reparto reflejado en
+`docs/equipo.json`. Ejecuta `Validar_Oracle.command` para comprobar que todo funciona
+en Oracle. Prepara el ZIP conservando esa memoria con
 `.venv/bin/python scripts/preparar_entrega.py`. Practicad la demostración entre
 todos y subid el ZIP a Prado. La memoria debe reflejar el trabajo real de cada
 persona, incluida la revisión y comprensión del código asistido.

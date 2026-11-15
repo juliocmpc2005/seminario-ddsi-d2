@@ -1,11 +1,26 @@
 {
   "subgrupo": "D2",
-  "fecha": "03/11/2026",
+  "fecha": "15/11/2026",
   "integrantes": [
-    {"nombre": "Julio", "tareas": "Pendiente de indicar el reparto real"},
-    {"nombre": "Juanjo", "tareas": "Pendiente de indicar el reparto real"},
-    {"nombre": "Jesús", "tareas": "Pendiente de indicar el reparto real"},
-    {"nombre": "Laura", "tareas": "Pendiente de indicar el reparto real"},
-    {"nombre": "David", "tareas": "Pendiente de indicar el reparto real"}
+    {
+      "nombre": "Julio Cardenete",
+      "tareas": "Implementación del código, revisión y corrección de errores con apoyo de IA; revisión conjunta y preparación de la entrega."
+    },
+    {
+      "nombre": "Juan José Sánchez",
+      "tareas": "Instalación y configuración del entorno, pruebas y comprobación con Oracle; revisión conjunta y preparación de la entrega."
+    },
+    {
+      "nombre": "Jesús Quesada",
+      "tareas": "Instalación y configuración del entorno, pruebas y comprobación con Oracle; revisión conjunta y preparación de la entrega."
+    },
+    {
+      "nombre": "Laura Moreno",
+      "tareas": "Instalación y configuración del entorno, pruebas y comprobación con Oracle; redacción principal de la memoria; revisión conjunta y preparación de la entrega."
+    },
+    {
+      "nombre": "Antonio David Chaves",
+      "tareas": "Implementación del código, revisión y corrección de errores con apoyo de IA; revisión conjunta y preparación de la entrega."
+    }
   ]
 }
